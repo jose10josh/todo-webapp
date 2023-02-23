@@ -3,8 +3,15 @@ import './CreateButton.css';
 
 
 function CreateTodoButton() {
+
+  const openModal = () => {
+
+  }
+
   return (
-    <button className="CreateTodoButton">+</button>
+    <button className="CreateTodoButton"
+      onClick={openModal}
+    >+</button>
   );
 }
 

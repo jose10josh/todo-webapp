@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {CreateTodoButton} from "./components/CreateButton/CreateButton";
 import { TodoCounter } from "./components/TodoCounter/TodoCounter";
 import { TodoItem } from "./components/TodoItem/TodoItem";
@@ -11,7 +12,7 @@ interface TodoItemModel {
   completed: boolean;
 }
 
-const todos:TodoItemModel[] = [
+const defaultTodos:TodoItemModel[] = [
   {id: 1, text:"todo 1", completed: false},
   {id: 2, text:"todo 2", completed: false},
   {id: 3, text:"todo 3", completed: false},
@@ -20,17 +21,24 @@ const todos:TodoItemModel[] = [
 
 
 function App() {
+  const [todoList, setTodoList] = useState<TodoItemModel[]>(defaultTodos);
+  const [searchVal, setSearchVal] = useState("");
+
+
+  const completedTodos = todoList.filter(item => item.completed).length
+  const totalTodos = todoList.length;
+
   return (
     <>
-      <TodoCounter />
-      <TodoSearch />
+      <TodoCounter completed={completedTodos} total={totalTodos} />
+      <TodoSearch searchVal={searchVal} setSearchVal={setSearchVal} />
 
       <TodoList>
-        {todos.map(todo => (
+        {todoList.map(todoItem => (
           <TodoItem
-            key={todo.id}
-            text={todo.text}
-            completed={todo.completed}
+            key={todoItem.id}
+            text={todoItem.text}
+            completed={todoItem.completed}
           />
         ))}
       </TodoList>
