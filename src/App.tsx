@@ -5,12 +5,17 @@ import { TodoList } from "./components/TodoList/TodoList";
 import { TodoSearch } from "./components/TodoSearch/TodoSearch";
 
 
+interface TodoItemModel {
+  id: number;
+  text: string;
+  completed: boolean;
+}
 
-const todos = [
-  {text:"todo 1", completed: false},
-  {text:"todo 2", completed: false},
-  {text:"todo 3", completed: false},
-  {text:"todo 5", completed: true},
+const todos:TodoItemModel[] = [
+  {id: 1, text:"todo 1", completed: false},
+  {id: 2, text:"todo 2", completed: false},
+  {id: 3, text:"todo 3", completed: false},
+  {id: 4, text:"todo 5", completed: true},
 ]
 
 
@@ -23,7 +28,7 @@ function App() {
       <TodoList>
         {todos.map(todo => (
           <TodoItem
-            key={todo.text}
+            key={todo.id}
             text={todo.text}
             completed={todo.completed}
           />
