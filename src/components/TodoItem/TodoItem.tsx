@@ -1,24 +1,18 @@
 import './TodoItem.css';
 
 type TodoItemProps = {
+  id: number,
   completed: boolean,
-  text: string
+  text: string,
+  onComplete:React.MouseEventHandler<HTMLButtonElement>
+  onDelete:React.MouseEventHandler<HTMLButtonElement>
 }
 
 function TodoItem(props:TodoItemProps) {
-
-  const onComplete = () => {
-
-  }
-
-  const onDelete = () => {
-
-  }
-
   return (
     <li className="TodoItem">
       <span className={`Icon Icon-check ${props.completed && 'Icon-check--active'}`}
-        onClick={() => {onComplete()}}
+        onClick={props.onComplete}
       >
         √
       </span>
@@ -26,7 +20,7 @@ function TodoItem(props:TodoItemProps) {
         {props.text}
       </p>
       <span className="Icon Icon-delete"
-        onClick={() => {onDelete()}}
+        onClick={props.onDelete}
       >
         X
       </span>

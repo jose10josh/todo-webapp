@@ -10,8 +10,6 @@ function TodoSearch({searchVal, setSearchVal}:TodoSearchProps) {
   const onSearchInputChange = (event:React.ChangeEvent<HTMLInputElement>) => {
     const val = event.target.value;
     setSearchVal(val);
-    console.log(val);
-
   }
 
   return (
