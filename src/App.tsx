@@ -13,10 +13,10 @@ interface TodoItemModel {
 }
 
 const defaultTodos:TodoItemModel[] = [
-  {id: 1, text:"todo 1", completed: false},
-  {id: 2, text:"todo 2", completed: false},
-  {id: 3, text:"todo 3", completed: false},
-  {id: 4, text:"todo 5", completed: true},
+  {id: 1, text:"Hacer la tarea", completed: false},
+  {id: 2, text:"Lavar los platos", completed: false},
+  {id: 3, text:"Doblar la ropa", completed: false},
+  {id: 4, text:"Lavar la ropa", completed: true},
 ]
 
 
@@ -24,9 +24,16 @@ function App() {
   const [todoList, setTodoList] = useState<TodoItemModel[]>(defaultTodos);
   const [searchVal, setSearchVal] = useState("");
 
-
   const completedTodos = todoList.filter(item => item.completed).length
   const totalTodos = todoList.length;
+
+  let serchedTodos:TodoItemModel[] = [];
+  if(searchVal.length <= 0) {
+    serchedTodos = todoList;
+  } else {
+    const searchedText:string = searchVal.toLowerCase();
+    serchedTodos = todoList.filter(item => item.text.toLowerCase().includes(searchedText))
+  }
 
   return (
     <>
@@ -34,7 +41,7 @@ function App() {
       <TodoSearch searchVal={searchVal} setSearchVal={setSearchVal} />
 
       <TodoList>
-        {todoList.map(todoItem => (
+        {serchedTodos.map(todoItem => (
           <TodoItem
             key={todoItem.id}
             text={todoItem.text}
