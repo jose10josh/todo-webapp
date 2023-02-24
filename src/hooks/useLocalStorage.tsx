@@ -1,24 +1,44 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 
-function useLocalStorage<TValue>(localName:string, initialValue:TValue):[TValue, React.Dispatch<React.SetStateAction<TValue>>, (itemList: TValue) => void] {
-  const localStorageItem = localStorage.getItem(localName);
-  let parsedItems:TValue = initialValue;
+function useLocalStorage<TValue>(localName:string, initialValue:TValue) {
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+  const [itemList, setItemList] = useState<TValue>(initialValue);
 
-  if(!localStorageItem){
-    localStorage.setItem(localName, JSON.stringify(parsedItems));
-  } else {
-    parsedItems = JSON.parse(localStorageItem);
-  }
+  useEffect(() => {
+    setTimeout(() => {
+      try {
+        const localStorageItem = localStorage.getItem(localName);
+        let parsedItems:TValue = initialValue;
 
-  const [itemList, setItemList] = useState<TValue>(parsedItems);
+        if(!localStorageItem){
+          localStorage.setItem(localName, JSON.stringify(parsedItems));
+        } else {
+          parsedItems = JSON.parse(localStorageItem);
+        }
+
+        setItemList(parsedItems);
+        setLoading(false);
+      } catch (error) {
+        setError(true);
+        console.log("An error ocurred: ", error)
+      }
+    }, 1500)
+  })
+
 
   const saveItem = (itemList:TValue) => {
-    setItemList(itemList);
-    localStorage.setItem(localName, JSON.stringify(itemList));
+    try {
+      setItemList(itemList);
+      localStorage.setItem(localName, JSON.stringify(itemList));
+    } catch (error) {
+      setError(true);
+      console.log("An error ocurred: ", error)
+    }
   }
 
-  return [itemList, setItemList, saveItem];
+  return {itemList, saveItem, loading, error};
 }
 
 export {useLocalStorage};

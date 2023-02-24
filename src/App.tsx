@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { TodoItemModel } from "./models/TodoItemModel";
 import { AppUI } from './components/AppUI';
@@ -13,14 +13,9 @@ import { useLocalStorage } from "./hooks/useLocalStorage";
 // ]
 
 
-
-
-
 function App() {
   const Storage_Name = "TODOS_V1";
-  const [todoList, setTodoList, saveTodos] = useLocalStorage<TodoItemModel[]>(Storage_Name, []);
-
-
+  const {itemList: todoList, saveItem: saveTodos, loading, error} = useLocalStorage<TodoItemModel[]>(Storage_Name, []);
   const [searchVal, setSearchVal] = useState("");
 
   const completedTodos = todoList.filter(item => item.completed).length
@@ -48,6 +43,10 @@ function App() {
     saveTodos(updateList);
   }
 
+  useEffect(() => {
+
+  }, [])
+
 
   return (
     <>
@@ -59,6 +58,8 @@ function App() {
         setSearchVal={setSearchVal}
         onCompleteTodo={onCompleteTodo}
         onDeleteTodo={onDeleteTodo}
+        loading={loading}
+        error={error}
       />
     </>
   );

@@ -15,7 +15,9 @@ type AppUIProps = {
   serchedTodos:TodoItemModel[],
   setSearchVal: React.Dispatch<React.SetStateAction<string>>,
   onCompleteTodo:(id: number, completed: boolean) => void,
-  onDeleteTodo:(id: number) => void
+  onDeleteTodo:(id: number) => void,
+  loading:boolean,
+  error:boolean
 }
 
 const AppUI = ({
@@ -25,7 +27,10 @@ const AppUI = ({
   setSearchVal,
   serchedTodos,
   onCompleteTodo,
-  onDeleteTodo
+  onDeleteTodo,
+
+  loading,
+  error
 }:AppUIProps) => {
   return (
     <>
@@ -33,16 +38,20 @@ const AppUI = ({
       <TodoSearch searchVal={searchVal} setSearchVal={setSearchVal} />
 
       <TodoList>
-        {serchedTodos.map(todoItem => (
-          <TodoItem
-            key={todoItem.id}
-            id={todoItem.id}
-            text={todoItem.text}
-            completed={todoItem.completed}
-            onComplete={() => onCompleteTodo(todoItem.id, todoItem.completed)}
-            onDelete={() => onDeleteTodo(todoItem.id)}
-          />
-        ))}
+        {loading ? <p>Cargando</p>
+        : error ? <p>Ocurrio un error</p>
+        : !serchedTodos.length ? <p>Crea tu primer todo</p>
+        : serchedTodos.map(todoItem => (
+            <TodoItem
+              key={todoItem.id}
+              id={todoItem.id}
+              text={todoItem.text}
+              completed={todoItem.completed}
+              onComplete={() => onCompleteTodo(todoItem.id, todoItem.completed)}
+              onDelete={() => onDeleteTodo(todoItem.id)}
+            />
+          ))
+        }
       </TodoList>
 
       <CreateTodoButton />
