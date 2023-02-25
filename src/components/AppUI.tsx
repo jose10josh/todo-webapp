@@ -7,6 +7,7 @@ import { TodoSearch } from './TodoSearch/TodoSearch';
 import { TodoContext } from '../context/TodoContext';
 import { TodoContextModel } from '../models/TodoContextModel';
 import {Modal} from './Modal/Modal';
+import { TodoForm } from './TodoForm/TodoForm';
 
 
 const AppUI = () => {
@@ -44,7 +45,7 @@ const AppUI = () => {
 
       {!!openModal &&
         <Modal>
-          <p>Este ES mi mega modal</p>
+          <TodoForm />
         </Modal>
       }
 

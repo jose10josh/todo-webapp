@@ -34,6 +34,17 @@ const useInitialState = ():TodoContextModel => {
     saveTodos(updateList);
   }
 
+  const addTodo = (todo:string) => {
+    const lastTodo = todoList[todoList.length - 1];
+    const newTodo:TodoItemModel = {
+      id: lastTodo.id+1,
+      text: todo,
+      completed: false
+    }
+    const updateList = [...todoList, newTodo];
+    saveTodos(updateList);
+  }
+
   return {
     completedTodos,
     totalTodos,
@@ -46,6 +57,7 @@ const useInitialState = ():TodoContextModel => {
 
     onCompleteTodo,
     onDeleteTodo,
+    addTodo,
 
     openModal,
     setOpenModal

@@ -12,6 +12,7 @@ export interface TodoContextModel {
 
   onCompleteTodo:(id: number, completed: boolean) => void,
   onDeleteTodo:(id: number) => void,
+  addTodo:(newTodo: string) => void,
 
   openModal:boolean,
   setOpenModal:React.Dispatch<React.SetStateAction<boolean>>,
