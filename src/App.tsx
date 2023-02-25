@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
 
-import { TodoItemModel } from "./models/TodoItemModel";
+import { TodoContext } from './context/TodoContext';
 import { AppUI } from './components/AppUI';
-import { useLocalStorage } from "./hooks/useLocalStorage";
+import { useInitialState } from './hooks/useInitialState';
+
 
 
 // const defaultTodos:TodoItemModel[] = [
@@ -14,54 +14,11 @@ import { useLocalStorage } from "./hooks/useLocalStorage";
 
 
 function App() {
-  const Storage_Name = "TODOS_V1";
-  const {itemList: todoList, saveItem: saveTodos, loading, error} = useLocalStorage<TodoItemModel[]>(Storage_Name, []);
-  const [searchVal, setSearchVal] = useState("");
-
-  const completedTodos = todoList.filter(item => item.completed).length
-  const totalTodos = todoList.length;
-
-  let serchedTodos:TodoItemModel[] = [];
-  if(searchVal.length <= 0) {
-    serchedTodos = todoList;
-  } else {
-    const searchedText:string = searchVal.toLowerCase();
-    serchedTodos = todoList.filter(item => item.text.toLowerCase().includes(searchedText))
-  }
-
-  const onCompleteTodo = (id: number, completed:boolean) => {
-    const todoIndex = todoList.findIndex(todo => todo.id === id);
-    const updateList = [...todoList];
-    updateList[todoIndex].completed = !completed;
-    saveTodos(updateList);
-  }
-
-  const onDeleteTodo = (id:number) => {
-    const todoIndex = todoList.findIndex(todo => todo.id === id);
-    const updateList = [...todoList];
-    updateList.splice(todoIndex, 1);
-    saveTodos(updateList);
-  }
-
-  useEffect(() => {
-
-  }, [])
-
-
+  const initialState = useInitialState();
   return (
-    <>
-      <AppUI
-        completedTodos={completedTodos}
-        totalTodos={totalTodos}
-        searchVal={searchVal}
-        serchedTodos={serchedTodos}
-        setSearchVal={setSearchVal}
-        onCompleteTodo={onCompleteTodo}
-        onDeleteTodo={onDeleteTodo}
-        loading={loading}
-        error={error}
-      />
-    </>
+    <TodoContext.Provider value={initialState}>
+      <AppUI/>
+    </TodoContext.Provider>
   );
 }
 

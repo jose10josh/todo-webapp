@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './TodoSearch.css';
+import { TodoContext } from '../../context/TodoContext';
+import { TodoContextModel } from '../../models/TodoContextModel';
 
-type TodoSearchProps = {
-  searchVal: string,
-  setSearchVal: React.Dispatch<React.SetStateAction<string>>
-}
-function TodoSearch({searchVal, setSearchVal}:TodoSearchProps) {
+
+function TodoSearch() {
+  const {setSearchVal, searchVal} = useContext(TodoContext) as TodoContextModel;
 
   const onSearchInputChange = (event:React.ChangeEvent<HTMLInputElement>) => {
     const val = event.target.value;
