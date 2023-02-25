@@ -7,6 +7,7 @@ import { useLocalStorage } from './useLocalStorage';
 const useInitialState = ():TodoContextModel => {
   const {itemList: todoList, saveItem: saveTodos, loading, error} = useLocalStorage<TodoItemModel[]>('TODOS_V1', []);
   const [searchVal, setSearchVal] = useState("");
+  const [openModal, setOpenModal] = useState(false);
 
   const completedTodos = todoList.filter(item => item.completed).length
   const totalTodos = todoList.length;
@@ -36,13 +37,18 @@ const useInitialState = ():TodoContextModel => {
   return {
     completedTodos,
     totalTodos,
-    searchVal,
     searchedTodos,
     loading,
     error,
+
+    searchVal,
     setSearchVal,
+
     onCompleteTodo,
-    onDeleteTodo
+    onDeleteTodo,
+
+    openModal,
+    setOpenModal
   }
 }
 

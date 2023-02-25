@@ -6,10 +6,20 @@ import { TodoList } from './TodoList/TodoList';
 import { TodoSearch } from './TodoSearch/TodoSearch';
 import { TodoContext } from '../context/TodoContext';
 import { TodoContextModel } from '../models/TodoContextModel';
+import {Modal} from './Modal/Modal';
 
 
 const AppUI = () => {
-  const {loading, error, searchedTodos, onCompleteTodo, onDeleteTodo} = useContext(TodoContext) as TodoContextModel;
+  const {
+    loading,
+    error,
+    searchedTodos,
+    onCompleteTodo,
+    onDeleteTodo,
+    openModal
+  } = useContext(TodoContext) as TodoContextModel;
+
+
   return (
     <>
       <TodoCounter />
@@ -31,6 +41,12 @@ const AppUI = () => {
           ))
         }
       </TodoList>
+
+      {!!openModal &&
+        <Modal>
+          <p>Este ES mi mega modal</p>
+        </Modal>
+      }
 
       <CreateTodoButton />
     </>
