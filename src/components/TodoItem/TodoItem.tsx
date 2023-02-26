@@ -1,29 +1,22 @@
+import { TodoIcon } from '../Icons/TodoIcon';
 import './TodoItem.css';
 
 type TodoItemProps = {
   id: number,
   completed: boolean,
   text: string,
-  onComplete:React.MouseEventHandler<HTMLButtonElement>
-  onDelete:React.MouseEventHandler<HTMLButtonElement>
+  onComplete:(id: number, completed: boolean) => void
+  onDelete:(id: number) => void
 }
 
 function TodoItem(props:TodoItemProps) {
   return (
     <li className="TodoItem">
-      <span className={`Icon Icon-check ${props.completed && 'Icon-check--active'}`}
-        onClick={props.onComplete}
-      >
-        √
-      </span>
+      <TodoIcon type="check" color={props.completed ? '#4caf50' : 'gray'} onClick={props.onComplete}/>
       <p className={`TodoItem-p ${props.completed && 'TodoItem-p--complete'}`}>
         {props.text}
       </p>
-      <span className="Icon Icon-delete"
-        onClick={props.onDelete}
-      >
-        X
-      </span>
+      <TodoIcon type="delete" color='gray' onClick={props.onDelete}/>
     </li>
   );
 }
