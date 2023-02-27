@@ -1,30 +1,45 @@
-import React, { useContext } from 'react';
-import { CreateTodoButton } from './CreateButton/CreateButton';
-import { TodoCounter } from './TodoCounter/TodoCounter';
-import { TodoItem } from './TodoItem/TodoItem';
-import { TodoList } from './TodoList/TodoList';
-import { TodoSearch } from './TodoSearch/TodoSearch';
-import { TodoContext } from '../context/TodoContext';
-import { TodoContextModel } from '../models/TodoContextModel';
-import {Modal} from './Modal/Modal';
-import { TodoForm } from './TodoForm/TodoForm';
+// import React, { useContext } from 'react';
+// import { CreateTodoButton } from './CreateButton/CreateButton';
+// import { TodoItem } from './TodoItem/TodoItem';
+// import { TodoList } from './TodoList/TodoList';
+// import { TodoContext } from '../context/TodoContext';
+// import { TodoContextModel } from '../models/TodoContextModel';
+// import {Modal} from './Modal/Modal';
+// import { TodoForm } from './TodoForm/TodoForm';
+// import { Header } from './Header/Header';
+// import { TodoCounter } from './TodoCounter/TodoCounter';
+// import { TodoSearch } from './TodoSearch/TodoSearch';
 
 
 const AppUI = () => {
-  const {
-    loading,
-    error,
-    searchedTodos,
-    onCompleteTodo,
-    onDeleteTodo,
-    openModal
-  } = useContext(TodoContext) as TodoContextModel;
+  // const {
+  //   loading,
+  //   error,
+  //   searchedTodos,
+  //   onCompleteTodo,
+  //   onDeleteTodo,
+  //   openModal,
+  //   setOpenModal,
+  //   completedTodos,
+  //   totalTodos,
+  //   setSearchVal,
+  //   searchVal,
+  //   addTodo
+  // } = useContext(TodoContext) as TodoContextModel;
 
 
   return (
     <>
-      <TodoCounter />
-      <TodoSearch />
+      {/* <Header >
+        <TodoCounter
+          completedTodos={completedTodos}
+          totalTodos={totalTodos}
+        />
+        <TodoSearch
+          setSearchVal={setSearchVal}
+          searchVal={searchVal}
+        />
+      </Header>
 
       <TodoList>
         {loading ? <p>Cargando</p>
@@ -45,11 +60,17 @@ const AppUI = () => {
 
       {!!openModal &&
         <Modal>
-          <TodoForm />
+          <TodoForm
+            addTodo={addTodo}
+            setOpenModal={setOpenModal}
+          />
         </Modal>
       }
 
-      <CreateTodoButton />
+      <CreateTodoButton
+        openModal={openModal}
+        setOpenModal={setOpenModal}
+      /> */}
     </>
   );
 };

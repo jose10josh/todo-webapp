@@ -1,15 +1,13 @@
-import React, { useContext } from 'react';
-import { TodoContext } from '../../context/TodoContext';
-import { TodoContextModel } from '../../models/TodoContextModel';
+import React from 'react';
 import './TodoForm.css'
 
-const TodoForm = () => {
-  const [newTodoValue, setNewTodoValue] = React.useState('');
-  const {
-    addTodo,
-    setOpenModal,
-  } = useContext(TodoContext) as TodoContextModel;
 
+type TodoFormModel = {
+  addTodo:(newTodo: string) => void,
+  setOpenModal:React.Dispatch<React.SetStateAction<boolean>>,
+}
+const TodoForm = ({addTodo,setOpenModal}:TodoFormModel) => {
+  const [newTodoValue, setNewTodoValue] = React.useState('');
 
   const onChange = (event:React.ChangeEvent<HTMLTextAreaElement>) => {
     setNewTodoValue(event.target.value);

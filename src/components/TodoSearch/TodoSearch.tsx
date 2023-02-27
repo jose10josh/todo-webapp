@@ -1,11 +1,12 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import './TodoSearch.css';
-import { TodoContext } from '../../context/TodoContext';
-import { TodoContextModel } from '../../models/TodoContextModel';
 
 
-function TodoSearch() {
-  const {setSearchVal, searchVal} = useContext(TodoContext) as TodoContextModel;
+type TodoSearchModel = {
+  setSearchVal:React.Dispatch<React.SetStateAction<string>>,
+  searchVal:string
+}
+function TodoSearch({setSearchVal, searchVal}:TodoSearchModel) {
 
   const onSearchInputChange = (event:React.ChangeEvent<HTMLInputElement>) => {
     const val = event.target.value;
@@ -13,7 +14,7 @@ function TodoSearch() {
   }
 
   return (
-    <input className="TodoSearch" placeholder="PlaceHolder"
+    <input className="TodoSearch" placeholder="My new to-do"
       value={searchVal}
       onChange={onSearchInputChange}
     />
