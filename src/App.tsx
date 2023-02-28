@@ -8,6 +8,10 @@ import { TodoForm } from './components/TodoForm/TodoForm';
 import { Header } from './components/Header/Header';
 import { TodoCounter } from './components/TodoCounter/TodoCounter';
 import { TodoSearch } from './components/TodoSearch/TodoSearch';
+import { ShowError } from './components/Error/Error';
+import { Loading } from './components/Loading/Loading';
+import { EmptyList } from './components/EmptyList/EmptyList';
+import { TodoItemModel } from './models/TodoItemModel';
 
 
 function App() {
@@ -39,22 +43,42 @@ function App() {
         />
       </Header>
 
-      <TodoList>
+      <TodoList
+        error={error}
+        loading={loading}
+        searchedTodos={searchedTodos}
+        onError={() => <ShowError />}
+        onLoading={() => <Loading />}
+        onEmptyTodos={() => <EmptyList />}
+        render={(todoItem:TodoItemModel) => (
+          <TodoItem
+            key={todoItem.id}
+            id={todoItem.id}
+            text={todoItem.text}
+            completed={todoItem.completed}
+            onComplete={() => onCompleteTodo(todoItem.id, todoItem.completed)}
+            onDelete={() => onDeleteTodo(todoItem.id)}
+          />
+        )}
+
+      />
+
+      {/* <TodoList>
         {loading ? <p>Cargando</p>
         : error ? <p>Ocurrio un error</p>
         : !searchedTodos.length ? <p>Crea tu primer todo</p>
         : searchedTodos.map(todoItem => (
-            <TodoItem
-              key={todoItem.id}
-              id={todoItem.id}
-              text={todoItem.text}
-              completed={todoItem.completed}
-              onComplete={() => onCompleteTodo(todoItem.id, todoItem.completed)}
-              onDelete={() => onDeleteTodo(todoItem.id)}
-            />
-          ))
+          <TodoItem
+            key={todoItem.id}
+            id={todoItem.id}
+            text={todoItem.text}
+            completed={todoItem.completed}
+            onComplete={() => onCompleteTodo(todoItem.id, todoItem.completed)}
+            onDelete={() => onDeleteTodo(todoItem.id)}
+          />
+        ))
         }
-      </TodoList>
+      </TodoList> */}
 
       {!!openModal &&
         <Modal>
