@@ -35,9 +35,13 @@ const useInitialState = ():TodoContextModel => {
   }
 
   const addTodo = (todo:string) => {
-    const lastTodo = todoList[todoList.length - 1];
+    let newId = 0;
+    if(todoList.length > 0) {
+      const lastTodo = todoList[todoList.length - 1];
+      newId = lastTodo.id+1;
+    }
     const newTodo:TodoItemModel = {
-      id: lastTodo.id+1,
+      id: newId,
       text: todo,
       completed: false
     }

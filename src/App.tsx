@@ -47,10 +47,23 @@ function App() {
         error={error}
         loading={loading}
         searchedTodos={searchedTodos}
+        totalTodos={totalTodos}
         onError={() => <ShowError />}
         onLoading={() => <Loading />}
-        onEmptyTodos={() => <EmptyList />}
-        render={(todoItem:TodoItemModel) => (
+        onEmptyTodos={() => <EmptyList> <p>¡Crea tu primer TODO!</p></EmptyList>}
+        onEmptySearch={() => <EmptyList > <p>No hay resultados para: {searchVal}</p></EmptyList>}
+        // render={(todoItem:TodoItemModel) => (
+        //   <TodoItem
+        //     key={todoItem.id}
+        //     id={todoItem.id}
+        //     text={todoItem.text}
+        //     completed={todoItem.completed}
+        //     onComplete={() => onCompleteTodo(todoItem.id, todoItem.completed)}
+        //     onDelete={() => onDeleteTodo(todoItem.id)}
+        //   />
+        // )}
+      >
+        {searchedTodos.map(todoItem => (
           <TodoItem
             key={todoItem.id}
             id={todoItem.id}
@@ -59,9 +72,8 @@ function App() {
             onComplete={() => onCompleteTodo(todoItem.id, todoItem.completed)}
             onDelete={() => onDeleteTodo(todoItem.id)}
           />
-        )}
-
-      />
+        ))}
+      </TodoList>
 
       {/* <TodoList>
         {loading ? <p>Cargando</p>

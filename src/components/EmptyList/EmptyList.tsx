@@ -1,6 +1,14 @@
+import React from 'react';
 
-function EmptyList() {
-  return <p>¡Crea tu primer TODO!</p>;
+type EmptyListModel = {
+  children: React.ReactNode
+}
+function EmptyList(props:EmptyListModel) {
+  return (
+    <div>
+      {props.children}
+    </div>
+  )
 }
 
 export { EmptyList };
