@@ -1,11 +1,17 @@
 import {useState} from 'react';
-import { TodoContextModel } from '../models/TodoContextModel';
+import { TodoContextModel, TodoContextStates, TodoContextUpdaters } from '../models/TodoContextModel';
 import { TodoItemModel } from '../models/TodoItemModel';
 import { useLocalStorage } from './useLocalStorage';
 
 
 const useInitialState = ():TodoContextModel => {
-  const {itemList: todoList, saveItem: saveTodos, loading, error} = useLocalStorage<TodoItemModel[]>('TODOS_V1', []);
+  const {
+    itemList: todoList,
+    saveItem: saveTodos,
+    loading,
+    error,
+    sincronizeItems:sincronizeTodos
+  } = useLocalStorage<TodoItemModel[]>('TODOS_V1', []);
   const [searchVal, setSearchVal] = useState("");
   const [openModal, setOpenModal] = useState(false);
 
@@ -49,22 +55,27 @@ const useInitialState = ():TodoContextModel => {
     saveTodos(updateList);
   }
 
-  return {
+  const hola = ""
+  const states:TodoContextStates = {
     completedTodos,
     totalTodos,
     searchedTodos,
     loading,
     error,
-
     searchVal,
+    openModal,
+  }
+  const statesUpdaters:TodoContextUpdaters = {
     setSearchVal,
-
     onCompleteTodo,
     onDeleteTodo,
     addTodo,
-
-    openModal,
-    setOpenModal
+    setOpenModal,
+    sincronizeTodos
+  }
+  return {
+    states,
+    statesUpdaters
   }
 }
 

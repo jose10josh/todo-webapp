@@ -1,12 +1,20 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 
 type HeaderModel = {
-  children:React.ReactNode
+  children:ReactElement<any>[] | ReactElement<any>
+  loading:boolean,
 }
-const Header = ({children}:HeaderModel) => {
+
+const Header = ({children, loading}:HeaderModel) => {
+
   return (
     <header>
-      {children}
+      {React.Children
+        .toArray(children)
+        .map(child => (
+          React.cloneElement(child as ReactElement<any>, {loading})
+        ))
+      }
     </header>
   );
 };

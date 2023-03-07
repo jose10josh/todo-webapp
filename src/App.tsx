@@ -12,31 +12,41 @@ import { ShowError } from './components/Error/Error';
 import { Loading } from './components/Loading/Loading';
 import { EmptyList } from './components/EmptyList/EmptyList';
 import { TodoItemModel } from './models/TodoItemModel';
+import { ChangeAlertWithStorageListener } from './components/WithStorageAlert/storageChange';
 
 
 function App() {
   const {
+    states,
+    statesUpdaters
+  } = useInitialState();
+
+  const {
     loading,
     error,
     searchedTodos,
-    onCompleteTodo,
-    onDeleteTodo,
     openModal,
-    setOpenModal,
     completedTodos,
     totalTodos,
+    searchVal
+  } = states;
+
+  const {
+    onCompleteTodo,
+    onDeleteTodo,
+    setOpenModal,
     setSearchVal,
-    searchVal,
-    addTodo
-  } = useInitialState();
+    addTodo,
+    sincronizeTodos
+  } = statesUpdaters;
 
   return (
     <>
-      <Header >
+      <Header loading={loading}>
         <TodoCounter
           completedTodos={completedTodos}
           totalTodos={totalTodos}
-        />
+          />
         <TodoSearch
           setSearchVal={setSearchVal}
           searchVal={searchVal}
@@ -104,6 +114,11 @@ function App() {
       <CreateTodoButton
         openModal={openModal}
         setOpenModal={setOpenModal}
+      />
+
+
+      <ChangeAlertWithStorageListener
+        sincronize={sincronizeTodos}
       />
     </>
   );

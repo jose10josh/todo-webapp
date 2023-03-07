@@ -4,9 +4,10 @@ import './TodoSearch.css';
 
 type TodoSearchModel = {
   setSearchVal:React.Dispatch<React.SetStateAction<string>>,
-  searchVal:string
+  searchVal:string,
+  loading?:boolean,
 }
-function TodoSearch({setSearchVal, searchVal}:TodoSearchModel) {
+function TodoSearch({setSearchVal, searchVal, loading}:TodoSearchModel) {
 
   const onSearchInputChange = (event:React.ChangeEvent<HTMLInputElement>) => {
     const val = event.target.value;
@@ -14,9 +15,12 @@ function TodoSearch({setSearchVal, searchVal}:TodoSearchModel) {
   }
 
   return (
-    <input className="TodoSearch" placeholder="My new to-do"
+    <input
+      className="TodoSearch"
+      placeholder="My new to-do"
       value={searchVal}
       onChange={onSearchInputChange}
+      disabled={loading}
     />
   );
 }
