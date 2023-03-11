@@ -13,13 +13,14 @@ export interface TodoContextStates {
   error:boolean,
   searchVal:string,
   openModal:boolean,
-
+  getTodoById:(id:number) => TodoItemModel|undefined
 }
 export interface TodoContextUpdaters {
   setSearchVal:React.Dispatch<React.SetStateAction<string>>,
   onCompleteTodo:(id: number, completed: boolean) => void,
   onDeleteTodo:(id: number) => void,
   addTodo:(newTodo: string) => void,
+  editTodo:(todoText: string, id: number) => void,
   setOpenModal:React.Dispatch<React.SetStateAction<boolean>>,
   sincronizeTodos:React.Dispatch<React.SetStateAction<boolean>>,
 }

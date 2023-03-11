@@ -82,7 +82,9 @@ const HomePage = () => {
             completed={todoItem.completed}
             onComplete={() => onCompleteTodo(todoItem.id, todoItem.completed)}
             onDelete={() => onDeleteTodo(todoItem.id)}
-            onEdit={() => {navigate(`/edit/${todoItem.id}`)}}
+            onEdit={() => {
+              navigate(`/edit/${todoItem.id}`, {state: {text:todoItem.text}})
+            }}
           />
         ))}
       </TodoList>

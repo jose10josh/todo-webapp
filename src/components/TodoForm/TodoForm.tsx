@@ -7,12 +7,13 @@ type TodoFormModel = {
   title:string,
   submitText:string,
   submitTodo:(newTodo: string) => void,
+  prevTodo?:string
   // setOpenModal:React.Dispatch<React.SetStateAction<boolean>>,
 }
 
 const TodoForm = (props:TodoFormModel) => {
   const navigate = useNavigate();
-  const [newTodoValue, setNewTodoValue] = React.useState('');
+  const [newTodoValue, setNewTodoValue] = React.useState(props.prevTodo || "");
 
   const onChange = (event:React.ChangeEvent<HTMLTextAreaElement>) => {
     setNewTodoValue(event.target.value);

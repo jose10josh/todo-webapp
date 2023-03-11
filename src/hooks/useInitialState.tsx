@@ -55,6 +55,18 @@ const useInitialState = ():TodoContextModel => {
     saveTodos(updateList);
   }
 
+  const editTodo = (todoText:string, id:number) => {
+    const todoIndex = todoList.findIndex(todo => todo.id === id);
+    const updateList = [...todoList];
+    updateList[todoIndex].text = todoText;
+    saveTodos(updateList);
+  }
+
+  const getTodoById = (id:number) => {
+    const todoItem = todoList.find(todo => todo.id === id);
+    return todoItem;
+  }
+
   const states:TodoContextStates = {
     completedTodos,
     totalTodos,
@@ -63,14 +75,16 @@ const useInitialState = ():TodoContextModel => {
     error,
     searchVal,
     openModal,
+    getTodoById
   }
   const statesUpdaters:TodoContextUpdaters = {
     setSearchVal,
     onCompleteTodo,
     onDeleteTodo,
     addTodo,
+    editTodo,
     setOpenModal,
-    sincronizeTodos
+    sincronizeTodos,
   }
   return {
     states,
