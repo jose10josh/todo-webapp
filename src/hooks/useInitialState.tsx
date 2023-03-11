@@ -41,11 +41,11 @@ const useInitialState = ():TodoContextModel => {
   }
 
   const addTodo = (todo:string) => {
-    let newId = 0;
-    if(todoList.length > 0) {
-      const lastTodo = todoList[todoList.length - 1];
-      newId = lastTodo.id+1;
-    }
+    let newId = newTodoId();
+    // if(todoList.length > 0) {
+    //   const lastTodo = todoList[todoList.length - 1];
+    //   newId = lastTodo.id+1;
+    // }
     const newTodo:TodoItemModel = {
       id: newId,
       text: todo,
@@ -55,7 +55,6 @@ const useInitialState = ():TodoContextModel => {
     saveTodos(updateList);
   }
 
-  const hola = ""
   const states:TodoContextStates = {
     completedTodos,
     totalTodos,
@@ -77,6 +76,10 @@ const useInitialState = ():TodoContextModel => {
     states,
     statesUpdaters
   }
+}
+
+const newTodoId = () => {
+  return Date.now();
 }
 
 
