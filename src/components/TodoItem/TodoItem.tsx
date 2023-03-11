@@ -7,6 +7,7 @@ type TodoItemProps = {
   text: string,
   onComplete:(id: number, completed: boolean) => void
   onDelete:(id: number) => void
+  onEdit:(id: number) => void
 }
 
 function TodoItem(props:TodoItemProps) {
@@ -16,6 +17,7 @@ function TodoItem(props:TodoItemProps) {
       <p className={`TodoItem-p ${props.completed && 'TodoItem-p--complete'}`}>
         {props.text}
       </p>
+      <TodoIcon type="edit" color='gray' onClick={props.onEdit}/>
       <TodoIcon type="delete" color='gray' onClick={props.onDelete}/>
     </li>
   );

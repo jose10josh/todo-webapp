@@ -3,6 +3,7 @@ import './Icon.css';
 // import CheckSVG  from './check.svg';
 import {CheckIcon} from './CheckIcon';
 import {DeleteIcon} from './DeleteIcon';
+import { EditIcon } from './EditIcon';
 
 const iconTypes:Record<string, (color:string)=>JSX.Element> = {
   "check": (color:string) => (
@@ -10,6 +11,9 @@ const iconTypes:Record<string, (color:string)=>JSX.Element> = {
   ),
   "delete": (color:string) => (
     <DeleteIcon iClass="Icon-svg Icon-svg--delete" fill={color} />
+  ),
+  "edit": (color:string) => (
+    <EditIcon iClass="Icon-svg Icon-svg--edit" fill={color} />
   ),
 };
 

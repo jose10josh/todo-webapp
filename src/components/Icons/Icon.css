@@ -28,3 +28,13 @@
 .Icon-container:hover .Icon-svg--delete {
   fill: red;
 }
+
+.Icon-container--edit {
+  position: absolute;
+  top: -24px;
+  right: 48px;
+}
+
+.Icon-svg--edit:hover {
+  fill: #61DAFA;
+}
